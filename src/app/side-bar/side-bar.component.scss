@@ -1,0 +1,132 @@
+body {
+    overflow: hidden;
+}
+
+.app-body {
+    display: flex;
+}
+
+.app-sidebar {
+    position: fixed;
+    background-color: #273544;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-bar-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+    overflow-y: auto;
+}
+
+.side-bar-separator {
+    border-color: #4eaf63;
+}
+
+.sidebar-item {
+    padding: 5px 15px;
+}
+
+.sidebar-item, .sidebar-sub-menu {
+    border-left: 3px solid #273544;
+}
+
+.sidebar-item-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6px;
+    white-space: nowrap;
+    border-radius: 5px;
+}
+
+.sidebar-item-icon {
+    color: white;
+    padding: 5px;
+    font-size: 20px;
+    height: 30px;
+    width: 32px;
+}
+
+.sidebar-sub-item-icon {
+    color: white;
+    padding: 5px;
+    font-size: 14px;
+    height: 16px;
+    width: 16px;
+}
+
+.sidebar-sub-menu-container {
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.sidebar-item.open-sub-menu {
+    .sidebar-item-link {
+        color: #4eaf63;
+        background-color: #1d2531;
+    }
+}
+
+.sidebar-sub-menu-container.sub-menu-opened {
+    max-height: 450px;
+}
+
+.sidebar-item.sub-menu-opened, .sidebar-sub-menu-container.sub-menu-opened {
+    border-left: 3px solid #4eaf63;
+}
+
+.sidebar-sub-menu {
+    padding: 5px 15px 5px 35px;
+}
+
+.sub-menu-arrow {
+    color: white;
+    margin-right: 10px;
+}
+
+.sidebar-item-text {
+    color: white;
+    padding-left: 10px;
+    white-space: nowrap;
+}
+
+.sidebar-item:hover, .sidebar-item.selected, .sidebar-sub-menu:hover, .sidebar-sub-menu.selected {
+    .sidebar-item-link, .sidebar-item-link {
+        background-color: #1d2531;
+    }
+    .sidebar-item-text, .sidebar-item-icon, .sidebar-sub-item-icon {
+        color: #4eaf63;
+    }
+}
+
+.link-style {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sidebar-container {
+    min-height: 100vh;
+    flex:1;
+
+    .app-header {
+        display: none;
+    }
+}
+
+.page-content {
+    height: 100%;
+    padding: 20px 40px 0px;
+}
+
+.desktop-container {
+    .app-sidebar {
+        width: 240px;
+    }
+    .sidebar-container {
+        padding-left: 240px;
+    }
+}

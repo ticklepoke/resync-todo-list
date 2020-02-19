@@ -1,0 +1,16 @@
+<app-side-bar (toggleFilter) = "toggleFilter($event)">
+    <div class="card-container">
+        <div class="card" *ngFor="let tile of tiles">
+          <h2 class="title"> {{ tile.title }} </h2>
+          <div class="sub-title"> {{ tile.count }} </div>
+        </div>
+      </div>
+        <div *ngFor="let todo of todos">
+          <h1>{{todo.title}}</h1>
+        </div>
+        <button mat-fab color="primary" class="add-btn">
+          <i class="fas fa-plus"></i>
+        </button>
+    
+
+</app-side-bar>

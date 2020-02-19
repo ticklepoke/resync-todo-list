@@ -1,0 +1,43 @@
+<div class="app-container desktop-container">
+
+    <div class="app-body">
+
+        <!-- side bar -->
+        <div class="app-sidebar">
+
+            <div class="site-bar-list">
+
+                <div *ngFor="let item of sidebarItems">
+
+                    <hr class="side-bar-separator" *ngIf="item.addSeparator" />
+
+                    <div class="sidebar-item">
+
+                        <a class="link-style sidebar-item-link" (click)="sidebarClicked(item)">
+                            <div class="vertical-center padding-5 word-nowrap">
+                                <i [class]="item.icon + ' sidebar-item-icon'"></i>
+                                <span class="sidebar-item-text"> {{ item.pageTitle }} </span>
+                            </div>
+
+                            <i *ngIf="item.subMenu && item.subMenu.length > 0"
+                                [ngClass]="{'selected': item.id == subMenuExpand}"
+                                class="fas fa-chevron-right sub-menu-arrow"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- main container -->
+        <div class="sidebar-container">
+
+            <div class="page-content">
+                <ng-content></ng-content>
+            </div>
+        </div>
+
+    </div>
+
+</div>
