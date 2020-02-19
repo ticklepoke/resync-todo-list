@@ -5,9 +5,17 @@
           <div class="sub-title"> {{ tile.count }} </div>
         </div>
       </div>
-        <div *ngFor="let todo of todos">
-          <h1>{{todo.title}}</h1>
-        </div>
+      <div>
+      <p *ngIf="loading; else showThis">
+        Loading...
+      </p>
+        <ng-template #showThis >
+          <div *ngFor="let todo of todos" >
+            <h1>{{todo.title}}</h1>
+          </div>
+        </ng-template>
+      </div>
+      
         <button mat-fab color="primary" class="add-btn">
           <i class="fas fa-plus"></i>
         </button>

@@ -26,12 +26,12 @@ export class TodoComponent implements OnInit {
   ];
   sortBy: SortBy = SortBy.All;
   todos: Todo[];
+  loading = true;
 
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
     this.getTodos();
-
   }
 
   toggleFilter(item) {
@@ -47,6 +47,8 @@ export class TodoComponent implements OnInit {
           this.todos = todos;
 
       }
+
+      this.loading = false;
     });
   }
 

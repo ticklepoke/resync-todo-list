@@ -1,4 +1,5 @@
 # NoteApp
+Demo can be viewed [here](https://ticklepoke.github.io/resync-todo-list/resync-todo-list/).
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
 
