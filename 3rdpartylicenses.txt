@@ -84,6 +84,12 @@ THE SOFTWARE.
 
 @angular/material/button
 
+@angular/material/progress-spinner
+
+@angular/material/snack-bar
+
+@angular/material/tooltip
+
 @angular/platform-browser
 MIT
 
