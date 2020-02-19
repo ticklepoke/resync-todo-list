@@ -12,6 +12,10 @@ Pre-commit linting is done using Angular's built in linting and enforced by [hus
 
 UI is built using [Material Angular](https://material.angular.io/).
 
+## Backend
+
+A [dummy backend Todo API](https://fakerestapi.azurewebsites.net/) is used to simulate API responses for CRUD operations.
+
 ## Todo
 
 - Unit tests
