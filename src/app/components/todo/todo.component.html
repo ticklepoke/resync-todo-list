@@ -1,24 +1,38 @@
-<app-side-bar (toggleFilter) = "toggleFilter($event)">
-    <div class="card-container">
-        <div class="card" *ngFor="let tile of tiles">
-          <h2 class="title"> {{ tile.title }} </h2>
-          <div class="sub-title"> {{ tile.count }} </div>
-        </div>
+<app-side-bar (toggleFilter)="toggleFilter($event)">
+  <div class="card-container">
+    <div
+      class="card"
+      [matTooltip]="tile.description"
+      *ngFor="let tile of tiles"
+    >
+      <h2 class="title">{{ tile.title }}</h2>
+      <div class="sub-title">{{ tile.count }}</div>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: flex-start; padding-left: 14px;">
+    <p>Sort By:</p>
+    <button class="btn" mat-button (click)="toggleSort('name')">Name</button>
+    <button class="btn" mat-button (click)="toggleSort('date')">
+      Due Date
+    </button>
+  </div>
+  <div>
+    <p *ngIf="loading; else showThis">
+      <mat-spinner
+        style="position: absolute; left: 50%; top: 50%"
+      ></mat-spinner>
+    </p>
+    <ng-template #showThis>
+      <div *ngFor="let todo of todosFiltered">
+        <app-todo-item
+          [todo]="todo"
+          (deleteTodo)="deleteTodo($event)"
+        ></app-todo-item>
       </div>
-      <div>
-      <p *ngIf="loading; else showThis">
-        Loading...
-      </p>
-        <ng-template #showThis >
-          <div *ngFor="let todo of todos" >
-            <h1>{{todo.title}}</h1>
-          </div>
-        </ng-template>
-      </div>
-      
-        <button mat-fab color="primary" class="add-btn">
-          <i class="fas fa-plus"></i>
-        </button>
-    
+    </ng-template>
+  </div>
 
+  <button mat-fab color="primary" class="add-btn">
+    <i class="fas fa-plus"></i>
+  </button>
 </app-side-bar>

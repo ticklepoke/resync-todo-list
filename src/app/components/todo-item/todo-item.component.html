@@ -1,0 +1,32 @@
+<div
+  class="card"
+  [ngClass]="setClasses()"
+  style="display: flex; justify-content: space-between; align-items: center;"
+>
+  <h3 class="title">
+    {{ todo.Title }}
+  </h3>
+  <p>Due: {{ todo.DueDate | date: "medium" }}</p>
+  <div>
+    <button
+      mat-mini-fab
+      matTooltip="Complete the task"
+      matTooltipPosition="above"
+      color="primary"
+      (click)="onToggle(todo)"
+      class="add-btn mr-1"
+    >
+      <i class="fas fa-check"></i>
+    </button>
+    <button
+      mat-mini-fab
+      color="warn"
+      matTooltip="Delete the task"
+      matTooltipPosition="above"
+      (click)="onDelete(todo)"
+      class="add-btn mr-1"
+    >
+      <i class="fas fa-trash"></i>
+    </button>
+  </div>
+</div>

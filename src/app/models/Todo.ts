@@ -1,6 +1,6 @@
 export class Todo {
-    id: number;
-    title: string;
-    completed: boolean;
-    reminder: Date;
+    ID: number;
+    Title: string;
+    Completed: boolean;
+    DueDate: Date;
 }
