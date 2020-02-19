@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../../models/Todo';
 import { TodoService } from '../../services/todo.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TodoDialogComponent } from '../todo-dialog/todo-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface TilesType {
   title: string;
@@ -33,8 +36,18 @@ export class TodoComponent implements OnInit {
   todos: Todo[];
   todosFiltered: Todo[];
   loading = true;
+  newTodo: Todo = {
+    Title: '',
+    ID: 0,
+    Completed: false,
+    DueDate: new Date()
+  };
 
-  constructor(private todoService: TodoService) {}
+  constructor(
+    private todoService: TodoService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.getTodos();
@@ -100,6 +113,39 @@ export class TodoComponent implements OnInit {
       } else if (todo.Completed === true && tile.title !== 'Alarm') {
         tile.count--;
       }
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TodoDialogComponent, {
+      width: '500px',
+      data: {
+        title: this.newTodo.Title,
+        DueDate: this.newTodo.DueDate,
+        Completed: this.newTodo.Completed,
+        ID: this.newTodo.ID
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        result.ID = this.todos.length;
+        result.Completed = false;
+        this.todoService.createTodo(result).subscribe(todo => {
+          this.todos.unshift(todo);
+          this.openSnackBar('Item added!', 'Dismiss');
+          this.newTodo.ID = 0;
+          this.newTodo.Title = '';
+          this.newTodo.DueDate = new Date();
+          this.newTodo.Completed = false;
+        });
+      }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
     });
   }
 }

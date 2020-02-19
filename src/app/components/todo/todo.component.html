@@ -16,7 +16,7 @@
       Due Date
     </button>
   </div>
-  <div>
+  <div style="padding-right: 80px;">
     <p *ngIf="loading; else showThis">
       <mat-spinner
         style="position: absolute; left: 50%; top: 50%"
@@ -32,7 +32,7 @@
     </ng-template>
   </div>
 
-  <button mat-fab color="primary" class="add-btn">
+  <button mat-fab color="primary" class="add-btn" (click)="openDialog()">
     <i class="fas fa-plus"></i>
   </button>
 </app-side-bar>
