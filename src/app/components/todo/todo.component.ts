@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Todo } from '../../models/Todo';
-import { TodoService } from '../../services/todo.service';
-import { MatDialog } from '@angular/material/dialog';
-import { TodoDialogComponent } from '../todo-dialog/todo-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnInit } from "@angular/core";
+import { Todo } from "../../models/Todo";
+import { TodoService } from "../../services/todo.service";
+import { MatDialog } from "@angular/material/dialog";
+import { TodoDialogComponent } from "../todo-dialog/todo-dialog.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 interface TilesType {
   title: string;
@@ -12,32 +12,32 @@ interface TilesType {
 }
 
 enum FilterBy {
-  todo = 'todo',
-  alarm = 'alarm',
-  history = 'history'
+  todo = "todo",
+  alarm = "alarm",
+  history = "history"
 }
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  selector: "app-todo",
+  templateUrl: "./todo.component.html",
+  styleUrls: ["./todo.component.scss"]
 })
 export class TodoComponent implements OnInit {
   tiles: TilesType[] = [
-    { title: 'All', count: 0, description: 'All items' },
+    { title: "All", count: 0, description: "All items" },
     {
-      title: 'Alarm',
+      title: "Alarm",
       count: 0,
-      description: 'Incompleted items that are due soon'
+      description: "Incompleted items that are due soon"
     },
-    { title: 'History', count: 0, description: 'Completed items' }
+    { title: "History", count: 0, description: "Completed items" }
   ];
   filterBy: string = FilterBy.todo;
   todos: Todo[];
   todosFiltered: Todo[];
   loading = true;
   newTodo: Todo = {
-    Title: '',
+    Title: "",
     ID: 0,
     Completed: false,
     DueDate: new Date()
@@ -55,21 +55,21 @@ export class TodoComponent implements OnInit {
 
   toggleFilter(item) {
     this.filterBy = FilterBy[item.id];
-    if (this.filterBy === 'todo') {
+    if (this.filterBy === "todo") {
       this.todosFiltered = this.todos;
-    } else if (this.filterBy === 'alarm') {
+    } else if (this.filterBy === "alarm") {
       this.todosFiltered = this.todos.filter(todo => !todo.Completed);
-    } else if (this.filterBy === 'history') {
+    } else if (this.filterBy === "history") {
       this.todosFiltered = this.todos.filter(todo => todo.Completed);
     }
   }
 
   toggleSort(item) {
-    if (item === 'name') {
+    if (item === "name") {
       this.todosFiltered.sort(
         (a, b) => parseInt(a.Title, 10) - parseInt(b.Title, 10)
       );
-    } else if (item === 'date') {
+    } else if (item === "date") {
       this.todosFiltered.sort((a, b) => {
         if (a.DueDate < b.DueDate) {
           return -1;
@@ -87,10 +87,10 @@ export class TodoComponent implements OnInit {
   getTodos() {
     this.todoService.getTodos().subscribe(todos => {
       todos.sort((a, b) => parseInt(a.Title, 10) - parseInt(b.Title, 10));
-      if (this.filterBy === 'todo') {
+      if (this.filterBy === "todo") {
         this.todos = todos;
         this.todosFiltered = todos;
-      } else if (this.filterBy === 'alarm') {
+      } else if (this.filterBy === "alarm") {
         this.todosFiltered = todos.filter(todo => !todo.Completed);
       }
       this.tiles[0].count = this.todosFiltered.length;
@@ -106,11 +106,12 @@ export class TodoComponent implements OnInit {
 
   deleteTodo(todo: Todo) {
     this.todosFiltered = this.todosFiltered.filter(t => t.ID !== todo.ID);
+    this.todos = this.todos.filter(t => t.ID !== todo.ID);
     this.todoService.deleteTodo(todo).subscribe();
     this.tiles.forEach(tile => {
-      if (todo.Completed === false && tile.title !== 'History') {
+      if (todo.Completed === false && tile.title !== "History") {
         tile.count--;
-      } else if (todo.Completed === true && tile.title !== 'Alarm') {
+      } else if (todo.Completed === true && tile.title !== "Alarm") {
         tile.count--;
       }
     });
@@ -118,7 +119,7 @@ export class TodoComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
-      width: '500px',
+      width: "500px",
       data: {
         title: this.newTodo.Title,
         DueDate: this.newTodo.DueDate,
@@ -133,11 +134,13 @@ export class TodoComponent implements OnInit {
         result.Completed = false;
         this.todoService.createTodo(result).subscribe(todo => {
           this.todos.unshift(todo);
-          this.openSnackBar('Item added!', 'Dismiss');
+          this.openSnackBar("Item added!", "Dismiss");
           this.newTodo.ID = 0;
-          this.newTodo.Title = '';
+          this.newTodo.Title = "";
           this.newTodo.DueDate = new Date();
           this.newTodo.Completed = false;
+          this.tiles[0].count++;
+          this.tiles[1].count++;
         });
       }
     });
@@ -147,5 +150,16 @@ export class TodoComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000
     });
+  }
+
+  toggleTodo(todo) {
+    this.todoService.toggleCompleted(todo).subscribe();
+    if (todo.Completed) {
+      this.tiles[1].count--;
+      this.tiles[2].count++;
+    } else {
+      this.tiles[1].count++;
+      this.tiles[2].count--;
+    }
   }
 }

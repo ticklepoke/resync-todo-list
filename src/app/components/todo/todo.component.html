@@ -27,6 +27,7 @@
         <app-todo-item
           [todo]="todo"
           (deleteTodo)="deleteTodo($event)"
+          (toggleTodo)="toggleTodo($event)"
         ></app-todo-item>
       </div>
     </ng-template>
