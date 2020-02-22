@@ -1,23 +1,23 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Todo } from "../models/Todo";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Todo } from '../models/Todo';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json"
+    'Content-Type': 'application/json'
   })
 };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class TodoService {
   // todosURL = 'https://jsonplaceholder.typicode.com/todos';
 
-  todosURL = "https://fakerestapi.azurewebsites.net/api/activities/";
-  todosLimit = "";
+  todosURL = 'https://fakerestapi.azurewebsites.net/api/activities/';
+  todosLimit = '';
 
   constructor(private http: HttpClient) {}
 
