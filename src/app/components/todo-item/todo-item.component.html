@@ -10,13 +10,16 @@
   <div>
     <button
       mat-mini-fab
-      matTooltip="Complete the task"
+      matTooltip="{{ todo.Completed ? 'Undo the task' : 'Complete the task' }}"
       matTooltipPosition="above"
       color="primary"
       (click)="onToggle(todo)"
       class="add-btn mr-1"
     >
-      <i class="fas fa-check"></i>
+      <i *ngIf="!todo.Completed; else undoIcon" class="fas fa-check"></i>
+      <ng-template #undoIcon>
+        <i class="fas fa-undo"></i>
+      </ng-template>
     </button>
     <button
       mat-mini-fab
