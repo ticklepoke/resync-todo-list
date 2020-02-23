@@ -16,7 +16,7 @@ UI is built using [Material Angular](https://material.angular.io/).
 
 A [dummy backend Todo API](https://fakerestapi.azurewebsites.net/) is used to simulate API responses for CRUD operations.
 
-Note: POST / PUT / CRUD operations do not persist when navigating between pages due to the dummy backend.
+Note: POST / PUT / DELETE operations do not persist when navigating between pages due to the dummy backend.
 
 ## Todo
 
