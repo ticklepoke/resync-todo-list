@@ -1,4 +1,4 @@
-# NoteApp
+# NoteApp [![Build Status](https://travis-ci.com/ticklepoke/resync-todo-list.svg?branch=master)](https://travis-ci.com/ticklepoke/resync-todo-list)
 
 ## Demo
 
