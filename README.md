@@ -1,4 +1,4 @@
-# NoteApp [![Build Status](https://travis-ci.com/ticklepoke/resync-todo-list.svg?branch=master)](https://travis-ci.com/ticklepoke/resync-todo-list)
+# NoteApp [![Build Status](https://travis-ci.com/ticklepoke/resync-todo-list.svg?branch=master)](https://travis-ci.com/ticklepoke/resync-todo-list) [![Coverage Status](https://coveralls.io/repos/github/ticklepoke/resync-todo-list/badge.svg?branch=master)](https://coveralls.io/github/ticklepoke/resync-todo-list?branch=master)
 
 ## Demo
 
